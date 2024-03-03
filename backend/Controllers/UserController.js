@@ -22,9 +22,9 @@ export default class UserController {
             const body = req.body;
             body.password = bcrypt.hashSync(body.password, 10);
             await User.create(body);
-            return res.json({ msg: "success" });
+            return res.status(201).json({ msg: "success" });
         } catch (e) {
-            return res.json({ msg: "Email tidak unik" })
+            return res.status(400).json({ msg: "Email tidak unik", error: e })
         }
     }
 
